@@ -14,7 +14,7 @@
         android:inputType="textPostalAddress"
         android:hint="@string/edit_message"
         android:ems="10"
-        android:id="@+id/edit_text_zipcode"
+        android:id="@+id/edit_text_place"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -24,16 +24,17 @@
         android:layout_height="wrap_content"
         android:text="@string/string_search"
         android:id="@+id/button_search"
-        android:layout_alignBottom="@+id/edit_text_zipcode"
-        android:layout_toRightOf="@+id/edit_text_zipcode"
-        android:layout_toEndOf="@+id/edit_text_zipcode" />
+        android:layout_alignBottom="@+id/edit_text_place"
+        android:layout_toRightOf="@+id/edit_text_place"
+        android:layout_toEndOf="@+id/edit_text_place"
+        android:onClick="searchWeather" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:id="@+id/text_view_weather"
-        android:layout_below="@+id/edit_text_zipcode"
+        android:layout_below="@+id/edit_text_place"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
