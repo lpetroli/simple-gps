@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPostalAddress"
-        android:hint="@string/edit_message"
+        android:hint="@string/message_edit_text"
         android:ems="10"
         android:id="@+id/edit_text_place"
         android:layout_alignParentTop="true"
