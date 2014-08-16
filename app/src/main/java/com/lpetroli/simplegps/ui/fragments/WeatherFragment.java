@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,8 +31,14 @@ public class WeatherFragment extends Fragment {
     private static final String LOG_TAG = "WeatherFragment";
 
     // Base URL for the OpenWeatherMap query
-    private static final String URL_FORMAT =
-            "http://api.openweathermap.org/data/2.5/find?q=%s&units=metric";
+    private static final String URL_SCHEME = "http";
+    private static final String URL_AUTHORITY = "api.openweathermap.org";
+    private static final String URL_PATH_DATA = "data";
+    private static final String URL_PATH_VERSION = "2.5";
+    private static final String URL_PATH_FIND = "find";
+    private static final String URL_KEY_QUERY = "q";
+    private static final String URL_KEY_UNITS = "units";
+    private static final String URL_UNITS_PARAM = "metric";
 
     private EditText mPlaceEditText;
     private TextView mWeatherTextView;
@@ -84,7 +91,13 @@ public class WeatherFragment extends Fragment {
         String place = mPlaceEditText.getText().toString();
         Log.d(LOG_TAG, "Show weather from: " + place);
 
-        new DownloadTask().execute(String.format(URL_FORMAT, place));
+        Uri.Builder uri = new Uri.Builder();
+        uri.scheme(URL_SCHEME).authority(URL_AUTHORITY);
+        uri.appendPath(URL_PATH_DATA).appendPath(URL_PATH_VERSION).appendPath(URL_PATH_FIND);
+        uri.appendQueryParameter(URL_KEY_QUERY, place);
+        uri.appendQueryParameter(URL_KEY_UNITS, URL_UNITS_PARAM);
+
+        new DownloadTask().execute(uri.build().toString());
     }
 
     void displayDownloadResult(String result) {
