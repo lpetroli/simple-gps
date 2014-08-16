@@ -7,5 +7,9 @@
     <string name="message_no_weather">Sorry!\nUnable to download weather information!</string>
     <string name="message_edit_text">Zipcode or City</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_city_name">City:</string>
+    <string name="string_country_name">Country:</string>
+    <string name="string_temperature">Temperature:</string>
+    <string name="string_celcius">ºC</string>
 
 </resources>
