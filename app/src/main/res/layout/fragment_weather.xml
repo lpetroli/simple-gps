@@ -35,6 +35,7 @@
         android:id="@+id/text_view_weather"
         android:layout_below="@+id/edit_text_place"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:freezesText="true" />
 
 </RelativeLayout>
