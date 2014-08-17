@@ -14,6 +14,7 @@ import com.lpetroli.simplegps.ui.fragments.WeatherFragment;
 
 public class MainActivity extends Activity {
     private static final String LOG_TAG = "MainActivity";
+    private static final String TAB_SAVE_STATE_NAME = "TabIndex";
 
     private MapsFragment mMaps = new MapsFragment();
     private WeatherFragment mWeather = new WeatherFragment();
@@ -58,8 +59,25 @@ public class MainActivity extends Activity {
                     .setTabListener(tabListener));
             actionBar.addTab(actionBar.newTab().setText(WeatherFragment.WEATHER_TAB_NAME)
                     .setTabListener(tabListener));
+
+            if(savedInstanceState != null) {
+                int tabState = savedInstanceState.getInt(TAB_SAVE_STATE_NAME);
+                actionBar.setSelectedNavigationItem(tabState);
+            }
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        final ActionBar actionBar = getActionBar();
+        if(actionBar != null) {
+            int i = actionBar.getSelectedNavigationIndex();
+            outState.putInt(TAB_SAVE_STATE_NAME, i);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
