@@ -9,6 +9,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +27,7 @@ public class MapsFragment extends MapFragment implements
      * This code is returned in Activity.onActivityResult
      */
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private static final float MAP_ZOOM = 15;
 
     private GoogleMap mMap;
     private LocationClient mLocationClient;
@@ -103,6 +105,8 @@ public class MapsFragment extends MapFragment implements
         customMarker.position(coordinates);
 
         mMap.addMarker(customMarker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, MAP_ZOOM));
+
     }
 
     private boolean servicesConnected() {
