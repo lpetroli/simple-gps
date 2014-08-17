@@ -1,14 +1,15 @@
 package com.lpetroli.simplegps.ui.activities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lpetroli.simplegps.R;
-import com.lpetroli.simplegps.ui.fragments.WeatherFragment;
+import com.lpetroli.simplegps.ui.fragments.MapsFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MapsFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = "MainActivity";
 
     @Override
@@ -17,7 +18,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new WeatherFragment())
+                    .add(R.id.container, new MapsFragment())
                     .commit();
         }
     }
@@ -41,4 +42,8 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
