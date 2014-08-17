@@ -3,7 +3,7 @@
 
     <string name="app_name">Simple GPS</string>
     <string name="action_settings">Settings</string>
-    <string name="string_search">Search</string>
+    <string name="string_find">Find</string>
     <string name="message_no_map">Sorry!\nUnable to download GoogleMaps information!</string>
     <string name="message_no_weather">Sorry!\nUnable to download weather information!</string>
     <string name="message_edit_text">Zipcode or City</string>

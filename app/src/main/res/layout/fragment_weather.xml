@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/string_search"
+        android:text="@string/string_find"
         android:id="@+id/button_search"
         android:layout_alignBottom="@+id/edit_text_place"
         android:layout_toRightOf="@+id/edit_text_place"

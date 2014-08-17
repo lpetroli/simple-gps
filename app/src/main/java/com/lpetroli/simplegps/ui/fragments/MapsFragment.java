@@ -21,6 +21,7 @@ public class MapsFragment extends MapFragment implements
         GooglePlayServicesClient.OnConnectionFailedListener {
 
     private static final String LOG_TAG = "MapsFragment";
+    public static final String MAPS_TAB_NAME = "GPS";
 
     /*
      * Define a request code to send to Google Play services

@@ -29,6 +29,7 @@ import java.net.URL;
 
 public class WeatherFragment extends Fragment {
     private static final String LOG_TAG = "WeatherFragment";
+    public static final String WEATHER_TAB_NAME = "Weather Finder";
 
     // Base URL for the OpenWeatherMap query
     private static final String URL_SCHEME = "http";
@@ -45,6 +46,7 @@ public class WeatherFragment extends Fragment {
     private Button mSearchButton;
 
     public WeatherFragment() {
+
     }
 
     @Override

@@ -1,24 +1,63 @@
 package com.lpetroli.simplegps.ui.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lpetroli.simplegps.R;
 import com.lpetroli.simplegps.ui.fragments.MapsFragment;
+import com.lpetroli.simplegps.ui.fragments.WeatherFragment;
 
 public class MainActivity extends Activity {
     private static final String LOG_TAG = "MainActivity";
 
+    private MapsFragment mMaps = new MapsFragment();
+    private WeatherFragment mWeather = new WeatherFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new MapsFragment())
-                    .commit();
+
+        final ActionBar actionBar = getActionBar();
+        // Specify that tabs should be displayed in the action bar.
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+            // Create a tab listener that is called when the user changes tabs.
+            ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+                private void replaceTab(Fragment fragment, FragmentTransaction transaction) {
+                    transaction.replace(R.id.container, fragment);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                }
+
+                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    if (tab.getText().equals(MapsFragment.MAPS_TAB_NAME)) {
+                        replaceTab(mMaps, ft);
+                    }
+                    if (tab.getText().equals(WeatherFragment.WEATHER_TAB_NAME)) {
+                        replaceTab(mWeather, ft);
+                    }
+                }
+
+                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    // ignore this event
+                }
+
+                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    // ignore this event
+                }
+            };
+
+            actionBar.addTab(actionBar.newTab().setText(MapsFragment.MAPS_TAB_NAME)
+                    .setTabListener(tabListener));
+            actionBar.addTab(actionBar.newTab().setText(WeatherFragment.WEATHER_TAB_NAME)
+                    .setTabListener(tabListener));
         }
     }
 
