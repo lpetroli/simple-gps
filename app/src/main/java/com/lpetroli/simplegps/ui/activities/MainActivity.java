@@ -1,7 +1,6 @@
 package com.lpetroli.simplegps.ui.activities;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +8,7 @@ import android.view.MenuItem;
 import com.lpetroli.simplegps.R;
 import com.lpetroli.simplegps.ui.fragments.MapsFragment;
 
-public class MainActivity extends Activity implements MapsFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity {
     private static final String LOG_TAG = "MainActivity";
 
     @Override
@@ -40,10 +39,5 @@ public class MainActivity extends Activity implements MapsFragment.OnFragmentInt
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

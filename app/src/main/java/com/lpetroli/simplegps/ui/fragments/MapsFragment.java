@@ -1,55 +1,57 @@
 package com.lpetroli.simplegps.ui.fragments;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.lpetroli.simplegps.R;
 
 public class MapsFragment extends MapFragment {
+    private static final String LOG_TAG = "MapsFragment";
 
-    private OnFragmentInteractionListener mListener;
+    private static final int MAX_GET_MAP_RETRIES = 5;
+    private static final long WAIT_MILLS = 500;
+
+    private GoogleMap mMap;
 
     public MapsFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        /* This background task is intended to acquire a valid GoogleMap reference, taking into
+         * account delays that may exist on map availability during fragment creation
+         */
+        Runnable background = new Runnable() {
+            @Override
+            public void run() {
+                MapFragment mFragment = MapFragment.newInstance();
+                for(int retries = 0; retries < MAX_GET_MAP_RETRIES; retries++){
+                    if((mMap = mFragment.getMap()) != null) {
+                        break;
+                    }
+                    try {
+                        Thread.sleep(WAIT_MILLS, 0);
+                    } catch (InterruptedException e) {
+                        Log.e(LOG_TAG, "Error: ", e);
+                    }
+                }
+
+                if(mMap == null) {
+                    Log.d(LOG_TAG, getString(R.string.message_no_weather));
+                }
+            }
+        };
+
+        new Thread( background ).start();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
-
 }
